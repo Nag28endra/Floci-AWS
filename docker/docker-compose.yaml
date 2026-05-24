@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+
+  floci:
+    image: floci/floci:latest
+
+    container_name: floci
+
+    ports:
+      - "4566:4566"
+
+    volumes:
+      - floci_data:/var/lib/floci
+
+    restart: unless-stopped
+
+volumes:
+  floci_data:
