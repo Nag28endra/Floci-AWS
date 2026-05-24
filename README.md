@@ -125,7 +125,66 @@ Run it:
 python delete_files_s3.py
 ```
 
-### 4. Logging system example
+### 4. Lambda examples
+
+Folder: `lambda-function/`
+
+These scripts show how to create, invoke, and delete a Lambda function in Floci.
+
+#### Deploy Lambda
+
+File: `deploy_lambda.py`
+
+This script:
+- connects to the Lambda endpoint in Floci
+- reads `lambda.zip`
+- creates a Lambda function named `Hello-Lambda`
+
+Run it:
+
+```bash
+cd lambda-function
+python deploy_lambda.py
+```
+
+#### Invoke Lambda
+
+File: `invoke_lambda.py`
+
+This script:
+- connects to Floci
+- invokes the `Hello-Lambda` function
+- sends a JSON payload
+
+Run it:
+
+```bash
+cd lambda-function
+python invoke_lambda.py
+```
+
+Example output:
+
+```json
+{"message": "Hello Nagendra"}
+```
+
+#### Delete Lambda
+
+File: `delete_lambda.py`
+
+This script:
+- connects to Floci
+- deletes the `Hello-Lambda` function
+
+Run it:
+
+```bash
+cd lambda-function
+python delete_lambda.py
+```
+
+### 5. Logging system example
 
 Folder: `projects/logging-system/`
 
@@ -165,8 +224,27 @@ python upload_files_s3.py
 python delete_files_s3.py
 ```
 
+### Lambda workflow
+
+A typical Lambda workflow in this repository is:
+
+1. Start Floci with Docker
+2. Deploy the Lambda function
+3. Invoke the Lambda function
+4. Delete the Lambda function when finished
+
+Example sequence:
+
+```bash
+cd lambda-function
+python deploy_lambda.py
+python invoke_lambda.py
+python delete_lambda.py
+```
+
 ## Notes
 
 - The current S3 examples assume the bucket name is `resume-storage`.
 - Files in the `data/` folder are used by the upload example.
+- The Lambda examples use the function name `Hello-Lambda`.
 - The project uses `boto3` and `botocore` from `requirements.txt`.
